@@ -51,6 +51,7 @@ public class Select {
 //			String sql = "select * from emp";
 			String sql = "select * from emp where deptno=20";
 			
+			
 			//서버로 sql 구문 전송
 			pstmt = con.prepareStatement(sql);
 			//전송된 sql 구문 실행 후 결과를 ResultSet 객체(테이블 형태)에 담게 됨
