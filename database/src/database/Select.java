@@ -48,8 +48,8 @@ public class Select {
 //			}
 			
 			// emp 테이블에 있는 내용 가져오기
-//			String sql = "select * from emp";
-			String sql = "select * from emp where deptno=20";
+			String sql = "select * from emp";
+//			String sql = "select * from emp where deptno=20";
 			
 			
 			//서버로 sql 구문 전송
