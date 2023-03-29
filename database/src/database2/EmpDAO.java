@@ -204,7 +204,7 @@ public class EmpDAO {	//~dao 데이터베이스 작업할거야.
 		} catch (Exception e) {
 			e.printStackTrace();
 		} finally {
-			
+			close(con, pstmt);
 		}
 		return status;
 	}

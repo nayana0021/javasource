@@ -14,7 +14,7 @@ import lombok.ToString;
 @NoArgsConstructor @AllArgsConstructor
 @Getter @Setter @ToString
 public class ProductDTO {
-    private int product_id ;
+    private int productId ;
     private String pname;
     private int price;
     private String content;

@@ -20,7 +20,7 @@ public class Connect {
 		Connection con = null;
 		
 		try {
-			Class.forName("oracle.jdbc.OracleDriver"); //드라이버 이름 (정해져있음)
+			Class.forName("oracle.jdbc.OracleDriver"); //드라이버 이름 (정해져있음) 드라이버를 까는 작업
 			
 			// jdbc:oracle:thin:@ 고정
 			
@@ -29,7 +29,7 @@ public class Connect {
 			// 1521 (기본포트번호)
 			// xe(기본 sid 이름) 
 			
-			String url = "jdbc:oracle:thin:@localhost:1521:xe";
+			String url = "jdbc:oracle:thin:@localhost:1521:xe";	//url을 가져온다
 			String user = "scott";
 			String password = "TIGER";
 			

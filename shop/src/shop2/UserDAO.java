@@ -32,7 +32,7 @@ public class UserDAO {
 			
 			//suser insert
 			String sql = "insert into suser(user_id,name,pay_no) values(?,?,?)";
-			
+			//오타 나면 sql 구문이 어쩌고 하면서 오류남
 			pstmt = con.prepareStatement(sql);
 			pstmt.setInt(1, userId);
 			pstmt.setString(2, name);
@@ -58,7 +58,11 @@ public class UserDAO {
 			
 			con = getConnection();
 			// suser 전체 조회
-			String sql = "select * from suser ";
+			//String sql = "select * from suser ";
+			
+			String sql = "select u.user_id, u.name, u.pay_no, p.info "	//공백 꼭 주기
+					+ "from suser u, paytype p "	//sql 은 자바에서 String이다
+					+ "where u.pay_no = p.pay_no";	//db 서버에 넘어갈때 위에 구문 바로 뒤에 붙어버림 -> 제대로 해석이 안됨
 			
 			pstmt = con.prepareStatement(sql);
 			rs = pstmt.executeQuery();
@@ -67,7 +71,7 @@ public class UserDAO {
 //				UserDTO dto = new UserDTO(rs.getInt(1), rs.getString(2), rs.getInt(3));
 //				list.add(dto);
 				
-				list.add(new UserDTO(rs.getInt(1), rs.getString(2), rs.getInt(3)));	//전체 인자를 받는 생성자를 이용함
+				list.add(new UserDTO(rs.getInt(1), rs.getString(2), rs.getInt(3), rs.getString(4)));	//전체 인자를 받는 생성자를 이용함
 			}
 			
 		} catch (Exception e) {

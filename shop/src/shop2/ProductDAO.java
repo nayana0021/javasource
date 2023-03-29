@@ -12,7 +12,7 @@ public class ProductDAO { //작성 오후4시 0328 강의
 	
 	private Connection con;
 	private PreparedStatement pstmt;
-	private ResultSet rs;
+	private ResultSet rs;	//rs => List 에 담아야 쓸수있다 0329 오후 3시30분 강의
 	
 	//전체 상품 조회
 	public List<ProductDTO> getList(){
@@ -30,7 +30,7 @@ public class ProductDAO { //작성 오후4시 0328 강의
 			
 			while(rs.next()) {
 				ProductDTO dto = new ProductDTO();
-				dto.setProduct_id(rs.getInt("product_id"));
+				dto.setProductId(rs.getInt("product_id"));
 				dto.setPname(rs.getString("pname"));
 				dto.setPrice(rs.getInt("price"));
 				dto.setContent(rs.getString("content"));
@@ -59,7 +59,7 @@ public class ProductDAO { //작성 오후4시 0328 강의
 			
 			pstmt = con.prepareStatement(sql);
 			// ? 처리
-			pstmt.setInt(1, dto.getProduct_id());	//값을 꺼내오는 거임
+			pstmt.setInt(1, dto.getProductId());	//값을 꺼내오는 거임
 			pstmt.setString(2, dto.getPname());
 			pstmt.setInt(3, dto.getPrice());
 			pstmt.setString(4, dto.getContent());
