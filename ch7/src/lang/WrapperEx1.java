@@ -44,9 +44,9 @@ public class WrapperEx1 {
 		
 		System.out.println("문자 형태의 숫자를 정수로 Integer.parseInt()"+Integer.parseInt("10"));	//static임
 		System.out.println("문자 형태의 숫자를 실수로 Double.parseDouble()"+Double.parseDouble("10"));	//static임
-		Float.parseFloat(""); 
-		Boolean.parseBoolean("true"); 
-		Long.parseLong("10");
+//		Float.parseFloat(""); 
+//		Boolean.parseBoolean("true"); 
+//		Long.parseLong("10");
 		
 		//기본형으로 선언된 변수를 참조형에 바로 대입 가능
 		Integer i4 = a;
