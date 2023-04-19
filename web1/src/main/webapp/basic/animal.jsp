@@ -16,6 +16,7 @@
 	//String animals = request.getParameter("animal"); 
 	
 	String animals[] = request.getParameterValues("animal");
+	// getParameterValues 값 여러개 가져온다 - 매개변수의 값을 문자열 배열로 반환
 	
 	out.print("<h3>"+Arrays.toString(animals)+"</h3>");
 %>

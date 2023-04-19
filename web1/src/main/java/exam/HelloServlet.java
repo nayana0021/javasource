@@ -11,7 +11,7 @@ import javax.servlet.http.HttpServletResponse;
 
 /**
  * jsp == servlet : 할 수 있는 일이 같음
- * 					사용자 요청 처
+ * 					사용자 요청 처리
  */
 @WebServlet("/HelloServlet")
 public class HelloServlet extends HttpServlet {

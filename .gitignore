@@ -1,6 +1,8 @@
 # Created by https://www.toptal.com/developers/gitignore/api/eclipse,java
 # Edit at https://www.toptal.com/developers/gitignore?templates=eclipse,java
 
+
+yeonseup/
 .classpath
 .project
 # c로 시작하거나 r로 시작하거나 s로 시작하는 폴더 안 ignore 파일 무시
@@ -101,5 +103,6 @@ hs_err_pid*
 replay_pid*
 
 # End of https://www.toptal.com/developers/gitignore/api/eclipse,java
+
 
 
