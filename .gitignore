@@ -9,6 +9,7 @@ yeonseup/
 [a-z]*/.gitignore
 Servers/
 .DS_Store
+[a-z]*/.DS_Store
 
 ### Eclipse ###
 .metadata

@@ -9,14 +9,18 @@
 
 
  --%>
-<% Cookie[] cookies = request.getCookies(); %> 
+ 
+<% 
+	// 클라이언트로부터 요청이 들어올 때 해당 사이트에서 저장해 둔
+	// 쿠키 가져오기
+	Cookie[] cookies = request.getCookies(); %> 
 <%!
 	private String getCookieValue(Cookie[] cookies, String name){
 		if(cookies == null){
 			return null;
 		}
 		for(Cookie c:cookies){
-			if(c.getName().equals(name)) return c.getValue();
+			if(c.getName().equals(name)) return c.getValue(); // name 이랑 똑같은거 찾아서 value 리턴해조-for문
 		}
 		return null;
 	}
