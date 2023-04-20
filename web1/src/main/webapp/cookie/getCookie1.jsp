@@ -23,6 +23,7 @@
 			if(c.getName().equals(name)) return c.getValue(); // name 이랑 똑같은거 찾아서 value 리턴해조-for문
 		}
 		return null;
+		
 	}
 %>    
 <!DOCTYPE html>
