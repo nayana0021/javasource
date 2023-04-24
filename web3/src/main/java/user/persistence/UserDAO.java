@@ -94,7 +94,7 @@ public class UserDAO {
 			String sql = "select * from usertbl";
 			pstmt = con.prepareStatement(sql);
 			
-			rs = pstmt.executeQuery();
+			rs = pstmt.executeQuery(); // 쿼리문 실행한 후 결과 전송
 			while(rs.next()){
 				int no = rs.getInt("no");
 				String username =rs.getString("username");
@@ -102,7 +102,7 @@ public class UserDAO {
 				String addr = rs.getString("addr");
 				String mobile = rs.getString("mobile");
 				
-				
+				list.add(new UserDTO(no, username, birthYear, addr, mobile));
 			}
 			
 		} catch (Exception e) {
@@ -111,8 +111,98 @@ public class UserDAO {
 			close(con, pstmt, rs);
 		}
 		return list;
-		
 	}
 	
+	public UserDTO  getRow(int no) {
+		UserDTO dto = null;
+		
+		try {
+			con = getConnection();
+			
+			String sql = "select * from usertbl where no=?";
+			pstmt = con.prepareStatement(sql); // 서버쪽으로 sql 문 보낸다 -> DB 서버가 파싱해서 계획을 세움
+			pstmt.setInt(1, no);
+			
+			rs = pstmt.executeQuery(); // 실행시켜줘
+			
+			
+			if(rs.next()){ //내용이 있으면 회원상세조회
+				String name = rs.getString("username"); // 가져올 정보를 변수에 담음
+				int birthYear = rs.getInt("birthYear");
+				String addr = rs.getString("addr");
+				String mobile= rs.getString("mobile");
+				
+				dto = new UserDTO(no, name, birthYear, addr, mobile);
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+		}finally {
+			close(con, pstmt, rs);
+		}
+		return dto;
+	}
 	
+	// 수정
+	public boolean update(int no, String addr, String mobile) {
+		boolean flag = false;
+		
+		try {
+			con = getConnection();
+			
+			String sql = "";
+			if(addr!="" && mobile!=""){
+				sql = "update usertbl set addr=?, mobile=? where no=?";
+				pstmt= con.prepareStatement(sql);
+				pstmt.setString(1, addr);
+				pstmt.setString(2, mobile);
+				pstmt.setInt(3, no);
+			}else {
+				if(addr!=""){
+				sql = "update usertbl set addr=? where no=?";
+				pstmt= con.prepareStatement(sql);
+				pstmt.setString(1, addr);
+				pstmt.setInt(2, no);
+				}else{
+				sql = "update usertbl set mobile=? where no=?";
+				pstmt= con.prepareStatement(sql);
+				pstmt.setString(1, mobile);
+				pstmt.setInt(2, no);
+				}
+			}
+			
+			int count = pstmt.executeUpdate();
+			
+			if(count > 0) flag = true;
+			
+		} catch (Exception e) {
+			e.printStackTrace();
+		}finally {
+			close(con, pstmt);
+		}
+		return flag;
+	}
+	
+	//삭제
+	public boolean remove(int no) {
+		
+		boolean flag = false;
+		
+		try {
+			
+			con = getConnection();
+			
+			String sql = "delete from usertbl where no=?";
+			
+			pstmt = con.prepareStatement(sql);
+			pstmt.setInt(1, no);
+			
+			int count = pstmt.executeUpdate(); // 카운트가 넘어옴
+			if(count > 0) flag=true;
+		} catch (Exception e) {
+			e.printStackTrace();
+		}finally {
+			close(con, pstmt);
+		}
+		return flag;
+	}
 }
