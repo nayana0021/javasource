@@ -39,7 +39,7 @@
 %>
     <tr> <!-- tr 한 행 씩 while문으로 돌림 -->
       <th scope="row"><%=rs.getInt("no") %></th>
-      <td><a href="get.jsp?no=<%=rs.getInt("no")%>&name=1"><%=rs.getString("username") %></a></td> <!-- 번호 붙여서 들어감 -->
+      <td><a href="get.jsp?no=<%=rs.getInt("no")%>"><%=rs.getString("username") %></a></td> <!-- 번호 붙여서 들어감 -->
       <!-- ? 를 쓰게 되면 주소줄에 따라 보내게 되고 보낼때 key=value 형식으로 보낸다 &로 더 연결가능 -->
       <td><%=rs.getInt("birthyear") %></td>
       <td><%=rs.getString("addr") %></td>
