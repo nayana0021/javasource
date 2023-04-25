@@ -1,8 +1,8 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ include file="/include/header.jsp" %>
-	<h1>도서 상세 조회</h1>
-	<form action="" method="post">
+	<h1>도서 정보 수정</h1>
+	<form action="updatePro.jsp" method="post">
 	  <div class="mb-3">
 	    <label for="code" class="form-label">code</label>
 	    <input type="text" class="form-control" id="code" name="code" value="${dto.code}" readonly>
@@ -17,7 +17,7 @@
 	  </div>
 	  <div class="mb-3">
 	    <label for="price" class="form-label">price</label>
-	    <input type="text" class="form-control" id="price" name="price" value="${dto.price}" readonly>
+	    <input type="text" class="form-control" id="price" name="price" value="${dto.price}" >
 	  </div>
 	  	  <div class="mb-3">
 	    <label for="description" class="form-label">description</label>
@@ -25,10 +25,11 @@
 	  </div> <%-- textarea는 value값을 태그 안에 넣는게 아니라 태그 사이 내용에 넣어준다 --%>
 	  
 	  	<button type="button" class="btn btn-primary">목록으로</button>
-	  	<button type="button" class="btn btn-success">수정</button>
+	  	<button type="submit" class="btn btn-success">수정</button>
+	  	<button type="button" class="btn btn-danger">삭제</button>
 </form>
 <script>
 	const code = ${dto.code};
 </script>
-	<script src="/js/read.js"></script>
+	<script src="/js/update.js"></script>
 <%@ include file="/include/footer.jsp" %>

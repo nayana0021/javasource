@@ -50,7 +50,7 @@ public class StringEx2 {
 		System.out.println("indexOf(int ch, int fromIndex) : "+str2.indexOf('e',2));	//-1
 		
 		//lastIndexOf() : 위치를 찾을 때 오른쪽 끝 부터 찾음
-		System.out.println("indexOf(int ch) : "+str2.lastIndexOf('o'));
+		System.out.println("lastindexOf(int ch) : "+str2.lastIndexOf('o'));
 		
 		//str3 문자열에 '프' 문자가 들어있는지 확인 : indexOf()
 		//String str3 = "자바 프로그래밍";

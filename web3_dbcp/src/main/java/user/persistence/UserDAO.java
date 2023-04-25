@@ -8,6 +8,10 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.naming.Context;
+import javax.naming.InitialContext;
+import javax.sql.DataSource;
+
 import user.domain.UserDTO;
 
 //	~~ DAO : 데이터베이스 작업
@@ -17,22 +21,14 @@ public class UserDAO {
 	private PreparedStatement pstmt;
 	private ResultSet rs;
 	
-	static {
-		try {
-			Class.forName("oracle.jdbc.OracleDriver");
-		} catch (ClassNotFoundException e) {
-			e.printStackTrace();
-		}
-	}
 	
 	public Connection getConnection() {
-		String url = "jdbc:oracle:thin:@localhost:1521:xe";
-		String user = "javadb";
-		String password = "12345";
+		Context ctx;
 		try {
-			Connection con = DriverManager.getConnection(url, user, password);
-			return con;
-		} catch (SQLException e) {
+			ctx = new InitialContext();
+			DataSource ds = (DataSource) ctx.lookup("java:comp/env/jdbc/myoracle");
+ 			return ds.getConnection();
+		} catch (Exception e) {
 			e.printStackTrace();
 		}
 		return null;
