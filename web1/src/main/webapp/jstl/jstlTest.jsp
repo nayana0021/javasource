@@ -20,12 +20,15 @@
 <c:if test="${5 < 10}">
 	<h3>5는 10보다 작다</h3>
 </c:if>
+
 <c:if test="${6 + 3 == 9}">
 	<h3>6 + 3 = 9</h3>
 </c:if>
 <!-- 태그 처럼 자바 코드를 쓸 수 있다는 장점이 있다 -->
 
-<c:choose>
+<!-- if else 개념 : choose when otherwise 사용 -->
+<!-- if문 for문 개념만 잘 알면 됨 -->
+<c:choose> 
 	<c:when test="${5+10 == 50}">
 		<h3>5 + 10 == 50 이다</h3>
 	</c:when>
@@ -34,18 +37,19 @@
 	</c:otherwise>
 </c:choose>
 <%
-/*  	
-	List<LoginDTO> loginDTO = (List<LoginDTO>)request.getAttribute("loginDTO");
+  	
+/* 	List<LoginDTO> loginDTO = (List<LoginDTO>)request.getAttribute("loginDTO");
  	
 	for(LoginDTO dto : loginDTO){
 		out.print("아이디 "+dto.getUserId()+"<br>");
 		out.print("비밀번호 "+dto.getPassword()+"<br>");
 		out.print("<hr/>");
 	}
- */ 	
+ */	
 %>
+<%-- 태그랑 섞일 때 : jstl로 forEach 돌리고 EL로 찾아오는 형태 -> 자바 코드를 간결하게 사용 가능 --%>
 <%-- var : 변수명(마음대로), items : setAttribute() 에서 사용했던 이름 --%>
-<<table border ="1">
+ <table border ="1">
 	<tr>
 		<th>아이디</th>
 		<th>비밀번호</th>
