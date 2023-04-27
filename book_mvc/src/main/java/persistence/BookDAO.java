@@ -82,7 +82,7 @@ public class BookDAO {
 			try {
 				
 				con = getConnection();
-				String sql = "select code,title,writer,price from booktbl order by code";
+				String sql = "select code,title,writer,price from booktbl order by code desc";
 				pstmt = con.prepareStatement(sql);
 				
 				rs = pstmt.executeQuery();
@@ -235,7 +235,47 @@ public class BookDAO {
 		}
 		return flag;
 		
+	}
+	
+	// 도서 검색 - 여러개 나온다고 보면 됨
+	public List<BookDTO> getSearchList(String criteria, String keyword){
+		List<BookDTO> list = new ArrayList<>();
 		
+		
+		try {
+			
+			con = getConnection();
+			// criteria => writer or title
+//			String sql = "select code,title,writer,price from booktbl where ";
+//			if(criteria.equals("writer")) {
+//				sql += "writer like ?";
+//			}else {
+//				sql += "title like ?";
+//			}
+			
+			//String sql = "select code,title,writer,price from booktbl where ? like ?"; //필드명에 ?는 못쓴다!! 이렇게는 안되고~
+			String sql = "select code,title,writer,price from booktbl where " + criteria + " like ? order by code desc"; // 물음표는 안되지만 변수 처리는 된다 이렇게 하면 sql 문은 한번만 쓸수있다
+			
+			pstmt = con.prepareStatement(sql);
+			pstmt.setString(1, "%"+keyword+"%"); // like(포함) 가 왔으니 %가 와야한다 - sql개념
+			rs = pstmt.executeQuery();
+			
+			while(rs.next()) {
+				BookDTO dto = new BookDTO();
+				dto.setCode(rs.getInt("code"));
+				dto.setTitle(rs.getString("title"));
+				dto.setWriter(rs.getString("writer"));
+				dto.setPrice(rs.getInt("price"));
+				list.add(dto);
+
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+		}finally {
+			close(con, pstmt, rs);
+		}
+		
+		return list;
 	}
 	
 	

@@ -18,6 +18,7 @@ public class BookReadAction implements BookAction {
 		BookDTO dto = service.read(code); // boolean 값이 아닌 이상 다 담는다
 		// request or session에 담는것을 달라지겠지만 값은 담는다
 		
+		//dto 가 생겼다 forward 시켜야 되니까 setAttribute 가 필요하다(담는다) - dto를 공유해야하니까
 		request.setAttribute("dto", dto);
 		
 		// ActionForward
