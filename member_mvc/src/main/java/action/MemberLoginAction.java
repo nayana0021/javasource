@@ -21,7 +21,7 @@ public class MemberLoginAction implements Action {
 		String path = "";
 		if(loginDto != null) {
 			HttpSession session = request.getSession(); //session 을 쓸수없으니 HttpSession 에서 빌려옹?
-			session.setAttribute("loginDto", loginDto);
+			session.setAttribute("loginDto", loginDto); //로그인정보 session 에 담아놨다
 			path = "index.jsp";
 		}else {
 			path = "login.jsp";

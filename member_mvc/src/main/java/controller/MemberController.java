@@ -31,19 +31,19 @@ public class MemberController extends HttpServlet {
 		MemberActionFactory maf = MemberActionFactory.getInstance();
 		Action action = maf.action(cmd);
 		
-		ActionForward af = null;
+		ActionForward af = null; 
 		
 		try {
-			af = action.execute(request);
+			af = action.execute(request); // Action 부모가 request 매개변수를 가지고 있다 각 자식마다 오버라이드한 액션이 들어옴
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
 		
 		if(af.isRedirect()) {
-			response.sendRedirect(af.getPath());
+			response.sendRedirect(af.getPath()); // ActionForward 리턴되는 boolean 값이 true 이면 sendRedirect 방식으로 이동
 		}else {
-			RequestDispatcher rd = request.getRequestDispatcher(af.getPath());
-			rd.forward(request, response);
+			RequestDispatcher rd = request.getRequestDispatcher(af.getPath()); // false 이면 forward
+			rd.forward(request, response); // 서블릿에서 넘어오는 request를 jsp에 넘겨줘야해서 (내용을 공유해야하는 경우) forward
 		}
 	
 	}
