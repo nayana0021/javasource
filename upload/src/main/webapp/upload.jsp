@@ -1,3 +1,5 @@
+<%@page import="java.net.URLEncoder"%>
+<%@page import="java.util.UUID"%>
 <%@page import="java.util.Iterator"%>
 <%@page import="org.apache.commons.fileupload.FileItem"%>
 <%@page import="java.util.List"%>
@@ -48,8 +50,23 @@
 		        if(!name.isEmpty()){
 		        	String path = "/Users/youngkyung/Documents/upload"; // 경로
 		        	
-		        	File f = new File(path+"//"+value); // 파일 객체 생성. upload 폴더에 가서 저장시켜줘
+		        	//고유값 생성  java.util
+		        	UUID uuid = UUID.randomUUID();
+		        	
+		        	// 		/Users/youngkyung/Documents/upload//고유값_배경.1.jpg 
+		        	File f = new File(path+"//"+uuid.toString()+"_"+value); // 파일 객체 생성. upload 폴더에 가서 저장시켜줘
 		        	item.write(f); // 파일 저장
+		        	
+		        	
+		        	// 다운로드를 위한 링크 생성 - 링크로 따라가는 것들은 인코딩을 해줘야 함
+		        	String encodeName = URLEncoder.encode(f.getName(),"utf-8");
+		        	
+		        	
+		        	out.print("<p>");
+		        	out.print("<a href='download.jsp?fileName="+encodeName+"'>"+value+"</a>");
+		        	out.print("</p>");
+		        	
+		        	
 		        }
 		        
 		        

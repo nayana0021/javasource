@@ -10,6 +10,7 @@
 			e.preventDefault();
 			e.stopPropagation();
 		}
+		
 		form.classList.add("was-validated");
 	})
 // 부트스트랩 이용
