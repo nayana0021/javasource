@@ -28,8 +28,6 @@
       <input type="file" class="form-control" id="inputAttach" name="attach">
     </div>
   </div>
-  
-  
   <div class="row mb-3">
     <label for="inputPassword3" class="col-sm-2 col-form-label">비밀번호</label>
     <div class="col-sm-10">
@@ -42,7 +40,5 @@
 </form>
 </main>
 
-
-
-
+<script src='<c:url value="/js/write.js" />'></script>
 <%@ include file="include/footer.jsp"%>
