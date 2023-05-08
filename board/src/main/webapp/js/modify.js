@@ -3,7 +3,9 @@
  */
 
  document.querySelector(".btn-success").addEventListener("click", ()=>{
-	 location.href="list.do";
+	// location.href="list.do";
+	 modifyForm.action = "list.do";
+	 modifyForm.submit();
  })
  
 	

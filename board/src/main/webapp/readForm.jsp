@@ -64,6 +64,10 @@
 </main>
 <form action="" id="readForm">
 	<input type="hidden" name="bno" value="${dto.bno}" /> <!-- hidden 태그라 안 보임다 -->
+	<input type="hidden" name="criteria" value="${pageDTO.criteria}" />
+	<input type="hidden" name="keyword" value="${pageDTO.keyword}" />
+	<input type="hidden" name="page" value="${pageDTO.page}" />
+	<input type="hidden" name="amount" value="${pageDTO.amount}" />
 </form>
 <script src='<c:url value="/js/read.js" />'></script>
 <%@ include file="include/footer.jsp"%>

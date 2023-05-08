@@ -66,15 +66,24 @@
 	  </div>
 	 </div>
 	 <input type="hidden" name="bno" value="${dto.bno}" /> <!-- form 안에만 담아주면 됨 bno숨기기 -->
+	  	<input type="hidden" name="criteria" value="${pageDTO.criteria}" />
+	<input type="hidden" name="keyword" value="${pageDTO.keyword}" />
+	<input type="hidden" name="page" value="${pageDTO.page}" />
+	<input type="hidden" name="amount" value="${pageDTO.amount}" />
 	  <button type="submit" class="btn btn-primary">수정</button>
 	  <button type="button" class="btn btn-danger">삭제</button>
 	  <button type="button" class="btn btn-success">목록보기</button>
 	</form>
 </main>
 <form action="" id="modifyForm"> <!-- method 따로 지정하지 않으면 get이어서 주소줄에 따라감 -->
-	<input type="hidden" name="bno" value="${dto.bno}" /> <!-- hidden 태그라 안 보임다 -->
-	<input type="hidden" name="password" value="" id="password" /> <!-- hidden 태그라 안 보임다 -->
+	<input type="hidden" name="bno" value="${dto.bno}" /> 
+	<input type="hidden" name="password" value="" id="password" />
+	<input type="hidden" name="criteria" value="${pageDTO.criteria}" />
+	<input type="hidden" name="keyword" value="${pageDTO.keyword}" />
+	<input type="hidden" name="page" value="${pageDTO.page}" />
+	<input type="hidden" name="amount" value="${pageDTO.amount}" />
 </form>
+
 	<script src='<c:url value="/js/modify.js" />'></script>
 <%-- <script src='<c:url value="/js/read.js" />'></script> --%>
 <%@ include file="include/footer.jsp"%>

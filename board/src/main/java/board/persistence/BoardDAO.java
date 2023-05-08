@@ -118,6 +118,11 @@ public class BoardDAO {
 	public List<BoardDTO> getRows(PageDTO pageDTO){
 		List<BoardDTO> list = new ArrayList<>();
 		
+		// rownum 값 : 페이지 번호 * 한 페이지에 보여줄 목록 개수
+		// rnum 값 : (페이지번호-1) * 한 페이지에 보여줄 목록 개수
+		int start = pageDTO.getPage() * pageDTO.getAmount();
+		int end = (pageDTO.getPage() -1) * pageDTO.getAmount();
+
 		try {
 			con = getConnection();
 			
@@ -138,20 +143,27 @@ public class BoardDAO {
 				pstmt = con.prepareStatement(sql);
 				
 				// ? 해결
-				// rownum 값 : 페이지 번호 * 한 페이지에 보여줄 목록 개수
-				// rnum 값 : (페이지번호-1) * 한 페이지에 보여줄 목록 개수
-				int start = pageDTO.getPage() * pageDTO.getAmount();
-				int end = (pageDTO.getPage() -1) * pageDTO.getAmount();
-				
 				pstmt.setInt(1, start);
 				pstmt.setInt(2, end);
 				
 			}else {
 				// 검색
-				sql = "select bno,title,name,regdate,cnt,re_lev from board ";
-				sql += "where " +pageDTO.getCriteria()+ " like ? order by re_ref desc, re_seq asc"; //필드명에서는 ? 처리 못함 -> 변수로 사용
+				//sql = "select bno,title,name,regdate,cnt,re_lev from board ";
+				//sql += "where " +pageDTO.getCriteria()+ " like ? order by re_ref desc, re_seq asc"; //필드명에서는 ? 처리 못함 -> 변수로 사용
+				
+				sql = "select * ";
+				sql += "from(select rownum rnum, bno, title, name, regdate, cnt, re_lev ";
+				sql +=   "from (select bno, title, name, regdate, cnt, re_lev ";
+				sql +=      "from board where " +pageDTO.getCriteria()+ " like ? ";
+				sql += "order by re_ref desc, re_seq asc) ";
+				sql +=   "where rownum <= ?) ";
+				sql += "where rnum > ?";
+
 				pstmt = con.prepareStatement(sql);
 				pstmt.setString(1, "%"+pageDTO.getKeyword()+"%");
+				pstmt.setInt(2, start);
+				pstmt.setInt(3, end);
+
 			}
 			
 			rs = pstmt.executeQuery();
@@ -174,6 +186,42 @@ public class BoardDAO {
 		}
 		return list;
 	}
+	
+	// 전체 게시물 개수
+	public int totalRows(PageDTO pageDTO) {
+		int total = 0;
+		try {
+			
+			con = getConnection();
+			String sql = "";
+			
+			if(pageDTO.getKeyword().isEmpty() && pageDTO.getCriteria().isEmpty()) {
+				sql = "select count(*) from board";
+				pstmt = con.prepareStatement(sql);
+			}else {
+				sql = "select count(*) from board where "+ pageDTO.getCriteria() +" like ?";
+				pstmt = con.prepareStatement(sql);
+				pstmt.setString(1, "%"+pageDTO.getKeyword()+"%");
+			}
+			
+			rs = pstmt.executeQuery();
+			if(rs.next()) {
+				total = rs.getInt(1); //1번 칼럼에 있는거 가져와
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+		}finally {
+			close(con, pstmt, rs);
+		}
+		return total;
+	}
+	
+	
+	
+	
+	
+	
+	
 	
 	// 게시글 하나 조회
 	public BoardDTO getRow(int bno){
